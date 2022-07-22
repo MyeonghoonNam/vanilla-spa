@@ -1,14 +1,8 @@
 import App from "./src/App.js";
-import getTodos from "./src/utils/getTodos.js";
-
-const main = document.querySelector(".todoapp");
-
-const state = {
-  todos: getTodos(),
-  currentFilter: "All",
-};
 
 window.requestAnimationFrame(() => {
-  const new_main = App(main, state);
+  const main = document.querySelector(".todoapp");
+  const new_main = new App(main).render();
+
   main.replaceWith(new_main);
 });
