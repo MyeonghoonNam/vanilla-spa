@@ -29,11 +29,11 @@ export default class App {
 
       Array.from(components).forEach((target) => {
         const name = target.dataset.component;
-        const render = this.components[name];
+        const component = this.components[name];
 
         if (!component) return;
 
-        target.replaceWith(render(target, state));
+        target.replaceWith(component(target, state));
       });
 
       return element;
