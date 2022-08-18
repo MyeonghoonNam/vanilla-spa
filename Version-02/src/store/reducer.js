@@ -5,18 +5,18 @@ const INITIAL_STATE = {
   currentFilter: "All",
 };
 
-const reducer = (state, action) => {
+const reducer = (state = INITIAL_STATE, action) => {
   if (!action) {
-    return INITIAL_STATE;
+    return { ...state };
   }
 
-  switch (action.type) {
-    case TODO_INSERT:
-      const newTodo = { ...action.payload };
+  const { type, payload } = action;
 
+  switch (type) {
+    case TODO_INSERT:
       return {
         ...state,
-        todos: state.todos.concat(newTodo),
+        todos: state.todos.concat({ ...payload }),
       };
   }
 };
