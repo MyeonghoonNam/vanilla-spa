@@ -1,5 +1,9 @@
 import { store } from "../../store/store.js";
-import { completeAllTodos, toggleTodo } from "../../store/action.js";
+import {
+  completeAllTodos,
+  toggleTodo,
+  deleteTodo,
+} from "../../store/action.js";
 import getClosestElement from "../../utils/getClosestElement.js";
 
 const Todos = () => {
@@ -15,6 +19,8 @@ const Todos = () => {
 
       if ($elementClassName === "toggle") {
         store.dispatch(toggleTodo(id));
+      } else if ($elementClassName === "destroy") {
+        store.dispatch(deleteTodo(id));
       }
     });
   };
