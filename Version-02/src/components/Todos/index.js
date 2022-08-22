@@ -7,14 +7,23 @@ const Todos = () => {
     const $element = document.createElement("section");
     $element.setAttribute("class", "main");
 
-    const { todos } = state;
+    const { todos, currentFilter } = state;
+    const filterTodos = todos.filter((todo) => {
+      if (currentFilter === "All") {
+        return todo;
+      } else if (currentFilter === "Active") {
+        return !todo.completed;
+      } else if (currentFilter === "Completed") {
+        return todo.completed;
+      }
+    });
 
     $element.innerHTML = `
       <input id="toggle-all" class="toggle-all" type="checkbox" />
       <label for="toggle-all"> Mark all as complete </label>
 
       <ul class="todo-list">
-      ${todos
+      ${filterTodos
         .map(
           ({ id, text, completed }) => `
         <li ${completed ? "class='completed'" : ""} data-id=${id}>
