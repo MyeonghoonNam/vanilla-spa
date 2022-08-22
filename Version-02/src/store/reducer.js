@@ -1,4 +1,9 @@
-import { TODO_INSERT, TODO_CHANGE_FILTER, TODO_COMPLETEALL } from "./action.js";
+import {
+  TODO_INSERT,
+  TODO_CHANGE_FILTER,
+  TODO_COMPLETEALL,
+  TODO_TOGGLE,
+} from "./action.js";
 
 const INITIAL_STATE = {
   todos: [],
@@ -23,6 +28,17 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         todos: state.todos.map((todo) => {
           todo.completed = true;
+          return todo;
+        }),
+      };
+    case TODO_TOGGLE:
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === payload.id) {
+            todo.completed = !todo.completed;
+          }
+
           return todo;
         }),
       };

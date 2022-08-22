@@ -1,10 +1,21 @@
 import { store } from "../../store/store.js";
-import { completeAllTodos } from "../../store/action.js";
+import { completeAllTodos, toggleTodo } from "../../store/action.js";
+import getClosestElement from "../../utils/getClosestElement.js";
 
 const Todos = () => {
   const bindEvents = (target) => {
     target.querySelector(".toggle-all").addEventListener("click", () => {
       store.dispatch(completeAllTodos());
+    });
+
+    target.querySelector(".todo-list").addEventListener("click", (e) => {
+      const $liElement = getClosestElement(e.target, "li");
+      const $elementClassName = e.target.className;
+      const id = $liElement.dataset.id;
+
+      if ($elementClassName === "toggle") {
+        store.dispatch(toggleTodo(id));
+      }
     });
   };
 
