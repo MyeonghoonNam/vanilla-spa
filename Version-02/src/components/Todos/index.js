@@ -1,7 +1,12 @@
 import { store } from "../../store/store.js";
+import { completeAllTodos } from "../../store/action.js";
 
 const Todos = () => {
-  const bindEvents = (target) => {};
+  const bindEvents = (target) => {
+    target.querySelector(".toggle-all").addEventListener("click", () => {
+      store.dispatch(completeAllTodos());
+    });
+  };
 
   const render = (state) => {
     const $element = document.createElement("section");
