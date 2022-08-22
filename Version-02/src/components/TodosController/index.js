@@ -1,9 +1,20 @@
 import { store } from "../../store/store.js";
+import { changeFilter } from "../../store/action.js";
+import getClosestElement from "../../utils/getClosestElement.js";
 
 const TodosController = () => {
   const FILTERS = ["All", "Active", "Completed"];
 
-  const bindEvents = (target) => {};
+  const bindEvents = (target) => {
+    target.querySelector(".filters").addEventListener("click", (e) => {
+      e.preventDefault();
+
+      if (e.target.tagName === "UL") return;
+
+      const $element = getClosestElement(e.target, "li");
+      store.dispatch(changeFilter($element.dataset.filter));
+    });
+  };
 
   const render = (state) => {
     const $element = document.createElement("footer");

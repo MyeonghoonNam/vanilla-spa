@@ -1,4 +1,4 @@
-import { TODO_INSERT } from "./action.js";
+import { TODO_INSERT, TODO_CHANGE_FILTER } from "./action.js";
 
 const INITIAL_STATE = {
   todos: [],
@@ -17,6 +17,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         todos: state.todos.concat({ ...payload }),
+      };
+    case TODO_CHANGE_FILTER:
+      return {
+        ...state,
+        currentFilter: payload.filter,
       };
   }
 };
