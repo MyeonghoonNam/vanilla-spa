@@ -2,6 +2,7 @@ export const TODO_INSERT = "TODO_INSERT";
 export const TODO_COMPLETEALL = "TODO_COMPLETEALL";
 export const TODO_TOGGLE = "TODO_TOGGLE";
 export const TODO_DELETE = "TODO_DELETE";
+export const TODO_UPDATE = "TODO_UPDATE";
 export const TODO_CHANGE_FILTER = "TODO_CHANGE_FILTER";
 
 export const insertTodo = (id, text) => ({
@@ -25,6 +26,11 @@ export const toggleTodo = (id) => ({
 export const deleteTodo = (id) => ({
   type: TODO_DELETE,
   payload: { id },
+});
+
+export const updateTodo = (id, text) => ({
+  type: TODO_UPDATE,
+  payload: { id, text },
 });
 
 export const changeFilter = (filter) => ({

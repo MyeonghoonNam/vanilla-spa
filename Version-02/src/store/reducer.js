@@ -4,6 +4,7 @@ import {
   TODO_COMPLETEALL,
   TODO_TOGGLE,
   TODO_DELETE,
+  TODO_UPDATE,
 } from "./action.js";
 
 const INITIAL_STATE = {
@@ -47,6 +48,17 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         todos: state.todos.filter(({ id }) => id !== payload.id),
+      };
+    case TODO_UPDATE:
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === payload.id) {
+            todo.text = payload.text;
+          }
+
+          return todo;
+        }),
       };
     case TODO_CHANGE_FILTER:
       return {

@@ -3,6 +3,7 @@ import {
   completeAllTodos,
   toggleTodo,
   deleteTodo,
+  updateTodo,
 } from "../../store/action.js";
 import getClosestElement from "../../utils/getClosestElement.js";
 
@@ -21,6 +22,33 @@ const Todos = () => {
         store.dispatch(toggleTodo(id));
       } else if ($elementClassName === "destroy") {
         store.dispatch(deleteTodo(id));
+      }
+    });
+
+    target.querySelector(".todo-list").addEventListener("dblclick", (e) => {
+      if (e.target.tagName !== "LABEL") return;
+      if (target.querySelector(".editing")) return;
+
+      const $element = getClosestElement(e.target, "li");
+      const $input = $element.querySelector(".edit");
+      const value = $input.value;
+
+      $element.classList.add("editing");
+
+      $input.focus();
+      $input.value = "";
+      $input.value = value;
+    });
+
+    target.querySelector(".todo-list").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const $element = getClosestElement(e.target, "li");
+        $element.classList.remove("editing");
+
+        const id = $element.dataset.id;
+        const text = e.target.value;
+
+        store.dispatch(updateTodo(id, text));
       }
     });
   };
@@ -57,7 +85,7 @@ const Todos = () => {
             <button class="destroy"></button>
           </div>
 
-          <input class="edit" />
+          <input type="text" class="edit" value=${text} />
         </li>
       `
         )
