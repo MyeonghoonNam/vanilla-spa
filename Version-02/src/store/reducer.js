@@ -1,10 +1,11 @@
 import {
   TODO_INSERT,
-  TODO_CHANGE_FILTER,
   TODO_COMPLETEALL,
   TODO_TOGGLE,
   TODO_DELETE,
   TODO_UPDATE,
+  TODO_CHANGE_FILTER,
+  TODO_CLEAR_COMPLETED,
 } from "./action.js";
 
 const INITIAL_STATE = {
@@ -64,6 +65,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentFilter: payload.filter,
+      };
+    case TODO_CLEAR_COMPLETED:
+      return {
+        ...state,
+        todos: state.todos.filter(({ completed }) => !completed),
       };
   }
 };

@@ -1,5 +1,5 @@
 import { store } from "../../store/store.js";
-import { changeFilter } from "../../store/action.js";
+import { changeFilter, clearCompletedTodo } from "../../store/action.js";
 import getClosestElement from "../../utils/getClosestElement.js";
 
 const TodosController = () => {
@@ -13,6 +13,10 @@ const TodosController = () => {
 
       const $element = getClosestElement(e.target, "li");
       store.dispatch(changeFilter($element.dataset.filter));
+    });
+
+    target.querySelector(".clear-completed").addEventListener("click", () => {
+      store.dispatch(clearCompletedTodo());
     });
   };
 
