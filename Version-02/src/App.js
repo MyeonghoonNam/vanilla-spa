@@ -4,7 +4,7 @@ const App = () => {
   const COMPONENTS = {
     Header: Header(),
     Todos: Todos(),
-    // TodosController: TodosController(),
+    TodosController: TodosController(),
   };
 
   const render = (target) => {
@@ -12,14 +12,14 @@ const App = () => {
 
     const $header = COMPONENTS["Header"]();
     const $todos = COMPONENTS["Todos"]();
-    // const $todosController = COMPONENTS["TodosController"]();
+    const $todosController = COMPONENTS["TodosController"]();
 
     const $element = document.createElement("section");
     $element.setAttribute("class", "todoapp");
 
     $element.appendChild($header);
     $element.appendChild($todos);
-    // $element.appendChild($todosController);
+    $element.appendChild($todosController);
 
     $container.appendChild($element);
 
