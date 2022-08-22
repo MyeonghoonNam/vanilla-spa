@@ -6,11 +6,12 @@ const createStore = () => {
   let state = reducer();
 
   const subscribe = (listener) => {
-    listener.push(listener);
+    listeners.push(listener);
   };
 
   const publish = () => {
-    listeners.forEach((listener) => listener(state));
+    const payload = freeze(state);
+    listeners.forEach((listener) => listener(payload));
   };
 
   const dispatch = (action) => {
