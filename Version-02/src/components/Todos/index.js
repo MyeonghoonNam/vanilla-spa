@@ -1,25 +1,50 @@
-const getTodoElement = (todo) => {
-  const { text, completed } = todo;
+import { store } from "../../store/store.js";
 
-  return `
-    <li ${completed && 'class="completed"'}>
-      <div class="view">
-        <input 
-          ${completed && "checked"}
-          class="toggle" 
-          type="checkbox">
-        <label>${text}</label>
-        <button class="destroy"></button>
-      </div>
+const Todos = () => {
+  const bindEvents = (target) => {};
 
-      <input class="edit" value="${text}">
-    </li>
-  `;
+  const render = (state) => {
+    const $element = document.createElement("section");
+    $element.setAttribute("class", "main");
+
+    const { todos } = state;
+
+    $element.innerHTML = `
+      <input id="toggle-all" class="toggle-all" type="checkbox" />
+      <label for="toggle-all"> Mark all as complete </label>
+
+      <ul class="todo-list">
+      ${todos
+        .map(
+          ({ id, text, completed }) => `
+        <li ${completed ? "class='completed'" : ""} data-id=${id}>
+          <div class="view">
+            <input class="toggle" type="checkbox" ${
+              completed ? "checked" : ""
+            } />
+            <label>${text}</label>
+            <button class="destroy"></button>
+          </div>
+
+          <input class="edit" />
+        </li>
+      `
+        )
+        .join("")}
+      </ul>
+    `;
+
+    return $element;
+  };
+
+  return () => {
+    const state = store.getState();
+    const $element = render(state);
+
+    bindEvents($element);
+
+    return $element;
+  };
 };
 
-export default (target, { todos }) => {
-  const todoList = target.cloneNode(true);
-  todoList.innerHTML = todos.map(getTodoElement).join("");
-
-  return todoList;
-};
+export default Todos;
