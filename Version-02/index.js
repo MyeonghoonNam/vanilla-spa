@@ -1,9 +1,22 @@
 import App from "./src/App.js";
+import { store } from "./src/store/store.js";
 import applyDiff from "./src/utils/applyDiff.js";
 
-window.requestAnimationFrame(() => {
-  const main = document.querySelector("#root");
-  const new_main = new App(main).render();
+const config = {
+  rootDom: "#root",
+};
 
-  applyDiff(document.body, main, new_main);
-});
+const app = App();
+
+const render = () => {
+  window.requestAnimationFrame(() => {
+    const entry = document.body;
+    const realDom = document.querySelector(config.rootDom);
+    const virtualDom = app(realDom);
+
+    applyDiff(entry, realDom, virtualDom);
+  });
+};
+
+store.subscribe(render);
+render();
