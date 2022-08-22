@@ -1,10 +1,11 @@
-import { Header, Todos, TodosController } from "./components/index.js";
+import { Header, Todos, TodosController, Footer } from "./components/index.js";
 
 const App = () => {
   const COMPONENTS = {
     Header: Header(),
     Todos: Todos(),
     TodosController: TodosController(),
+    Footer: Footer(),
   };
 
   const render = (target) => {
@@ -13,6 +14,7 @@ const App = () => {
     const $header = COMPONENTS["Header"]();
     const $todos = COMPONENTS["Todos"]();
     const $todosController = COMPONENTS["TodosController"]();
+    const $footer = COMPONENTS["Footer"]();
 
     const $element = document.createElement("section");
     $element.setAttribute("class", "todoapp");
@@ -22,6 +24,7 @@ const App = () => {
     $element.appendChild($todosController);
 
     $container.appendChild($element);
+    $container.appendChild($footer);
 
     return $container;
   };
