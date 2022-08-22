@@ -1,4 +1,4 @@
-import { TODO_INSERT } from "./actions.js";
+import { TODO_INSERT } from "./action.js";
 
 const INITIAL_STATE = {
   todos: [],

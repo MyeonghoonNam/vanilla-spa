@@ -1,5 +1,5 @@
 import { store } from "../../store/store.js";
-import { insertTodo } from "../../store/actions.js";
+import { insertTodo } from "../../store/action.js";
 import getUniqueId from "../../utils/getUniqueId.js";
 
 const Header = () => {
