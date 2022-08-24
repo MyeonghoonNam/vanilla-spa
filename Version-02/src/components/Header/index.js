@@ -18,8 +18,10 @@ const Header = () => {
     $element.innerHTML = `
       <h1>todos</h1>
       <input
+        type="text"
         class="new-todo"
         placeholder="What needs to be done?"
+        autofocus
       />
     `;
 
